@@ -333,7 +333,12 @@ def AIS_Decoder(message, f, finfo, log):
             isum = 0
             for i in range(20):
                 try:
-                    desstring += BITS_TO_ASCII[des[isum:isum + 6]]
+                    item = BITS_TO_ASCII[des[isum:isum + 6]]
+                    if (item >= 'A' and item <= 'Z') or (item >= '0' and item <= '9') :
+                        item = item
+                    else:
+                        item = ' '
+                    desstring += item
                     isum += 6
                 except KeyError:
                     return
@@ -343,7 +348,8 @@ def AIS_Decoder(message, f, finfo, log):
                         str(bits_to_numbers(B)) + "," + str(bits_to_numbers(C)) + "," + str(bits_to_numbers(D)) + "," + \
                         str(bits_to_numbers(A) + bits_to_numbers(B)) + "," + str(bits_to_numbers(C) + bits_to_numbers(D)) + "," + \
                         str(bits_to_numbers(position)) + "," + str(bits_to_numbers(ETA_month)) + "," + str(bits_to_numbers(ETA_day)) + "," + str(bits_to_numbers(ETA_hour)) + "," + \
-                        str(bits_to_numbers(ETA_min)) + "," + str(bits_to_numbers(chishui) * 0.1) + "," + str(year) + "," + str(month) + "," + str(day) + "," + str(hour) + "," + str(minute) + "," + str(sec) + \
+                        str(bits_to_numbers(ETA_min)) + "," + str(bits_to_numbers(chishui) * 0.1) + "," + desstring + "," + \
+                        str(year) + "," + str(month) + "," + str(day) + "," + str(hour) + "," + str(minute) + "," + str(sec) + \
                         "\r\n"
             finfo.write(writeString)
             log.write(tmpmessage)
