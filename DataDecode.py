@@ -19,8 +19,8 @@ for i in range(10000):
         Decoder.AIS_Decoder(line, fwirt, finfo, flog)
         line = f.readline()
         sum += 1
-        if sum % 10000 == 0:
-            print(sum)
+        # if sum % 10000 == 0:
+        #     print(sum)
     f.close()
 fwirt.close()
 flog.close()

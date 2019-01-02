@@ -383,11 +383,11 @@ def AIS_Decoder(message, f, finfo, log):
         Reserved_for_regional = bits[143:145] #3
         #145-147位未使用
         RAIM_flag = bits[148]
-        Communication_State = bits[149:168]
-        Sync_state = Communication_State[0:2]
-        Slot_Timeout = Communication_State[2:5]
-        UTC_hour = Communication_State[5:10]
-        UTC_minute = Communication_State[10:19]
+        # Communication_State = bits[149:168]
+        # Sync_state = Communication_State[0:2]
+        # Slot_Timeout = Communication_State[2:5]
+        # UTC_hour = Communication_State[5:10]
+        # UTC_minute = Communication_State[10:19]
 
         writeString = str(id) + "," + str(bits_to_numbers(Message_Type)) + "," + \
                       str(bits_to_numbers(Repeat_Indicator)) + "," + \
@@ -416,17 +416,19 @@ def AIS_Decoder(message, f, finfo, log):
                 return
             if len(bits) < 168:
                 return
-            zhuanfa = bits[6:8] #2
-            MMSI = bits[8:38] #30
+            # zhuanfa = bits[6:8] #2
+            # MMSI = bits[8:38] #30
             UTC_year = bits[38:52] #14
             UTC_month = bits[52:56] #4
             UTC_day = bits[56:61] #5
             UTC_hour = bits[61:66] #5
             UTC_min = bits[66:72] #6
             UTC_second = bits[72:78] #6
-            Position_Accuracy = bits[78]  # 1
-            Longitude = bits[79:107]  # 28
-            Latitude = bits[107:134]  # 27
+            # Position_Accuracy = bits[78]  # 1
+            # Longitude = bits[79:107]  # 28
+            # Latitude = bits[107:134]  # 27
+            if bits_to_numbers(UTC_year) < 2018 or bits_to_numbers(UTC_year) > 2019:
+                return
             year = bits_to_numbers(UTC_year)
             month = bits_to_numbers(UTC_month)
             day = bits_to_numbers(UTC_day)
