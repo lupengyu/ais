@@ -278,7 +278,10 @@ def AIS_Decoder(message, f, finfo, log):
     if len(messages) == 7 and messages[6] != "":
         if len(check) > 0 and check[0] != "0":
             for item in check[0]:
-                bits += ASCII_TO_6BITS[item]
+                try:
+                    bits += ASCII_TO_6BITS[item]
+                except KeyError:
+                    return
                 # if len(check) > 1:
                 #     # print("add:", item)
                 #     CRC = CRC_check(CRC, ASCII_TO_6BITS[item])

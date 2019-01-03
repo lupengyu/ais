@@ -8,7 +8,7 @@ finfo = open("info.csv", "w+")
 filecnt = 0
 for i in range(10000):
     try:
-        f = open("data/f" + str(i) + ".txt")
+        f = open("/root/aaa/f" + str(i) + ".txt")
     except FileNotFoundError:
         continue
     print(str(i) + ".txt")
