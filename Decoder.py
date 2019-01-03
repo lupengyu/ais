@@ -355,8 +355,10 @@ def AIS_Decoder(message, f, finfo, log):
                         str(year) + "," + str(month) + "," + str(day) + "," + str(hour) + "," + str(minute) + "," + str(sec) + \
                         "\r\n"
             finfo.write(writeString)
+            finfo.flush()
             log.write(tmpmessage)
             log.write(message + "decode: " + writeString)
+            log.flush()
             infoid += 1
         waitSingle = 0
         return
@@ -411,7 +413,9 @@ def AIS_Decoder(message, f, finfo, log):
         writeString += str(year) + "," + str(month) + "," + str(day) + "," + str(hour) + "," + str(minute) + "," + str(sec)
         writeString += "\r\n"
         f.write(writeString)
+        f.flush()
         log.write(message + "decode: " + writeString)
+        log.flush()
         id += 1
     else:
         if bits_to_numbers(Message_Type) == 4 or bits_to_numbers(Message_Type) == 11:
