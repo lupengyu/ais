@@ -223,7 +223,6 @@ def AIS_Decoder(message, f, finfo, log):
     # 判断标识符定义是否正确
     if messages[0] != "!AIVDM" and messages[0] != "!AIVDO":
         return
-
     # 判断语句数是否正确
     sum = 0
     if messages[1].isdigit():
@@ -294,6 +293,7 @@ def AIS_Decoder(message, f, finfo, log):
         if waitSingle == 5:
             #348 84
             if sum != 2 or cnt != 2:
+                waitSingle = 0
                 return
             zhuanfa = tmpbit[6:8] #2
             MMSI = tmpbit[8:38] #30
@@ -307,6 +307,7 @@ def AIS_Decoder(message, f, finfo, log):
                     huhaostring += BITS_TO_ASCII[huhao[isum:isum + 6]]
                     isum += 6
                 except KeyError:
+                    waitSingle = 0
                     return
             name = tmpbit[112:232] #120
             namestring = ""
@@ -316,6 +317,7 @@ def AIS_Decoder(message, f, finfo, log):
                     namestring += BITS_TO_ASCII[name[isum:isum + 6]]
                     isum += 6
                 except KeyError:
+                    waitSingle = 0
                     return
             type = tmpbit[232:240] #8
             size = tmpbit[240:270]
@@ -344,6 +346,7 @@ def AIS_Decoder(message, f, finfo, log):
                     desstring += item
                     isum += 6
                 except KeyError:
+                    waitSingle = 0
                     return
             writeString = str(infoid) + "," + str(bits_to_numbers(zhuanfa)) + "," + str(bits_to_numbers(MMSI)) + "," + \
                         str(bits_to_numbers(AIS)) + "," + str(bits_to_numbers(IMO)) + "," + huhaostring + "," + \
