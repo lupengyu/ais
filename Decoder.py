@@ -405,11 +405,11 @@ def AIS_Decoder(message, f, finfo, log):
                       str(bits_to_numbers(SOG) * 0.1) + "," + \
                       str(bits_to_numbers(Position_Accuracy)) + ","
         if Longitude[0] == "0":
-            writeString += str(int(bits_to_numbers(Longitude[1:]) / 600000)) + "." + str(int((bits_to_numbers(Longitude[1:]) % 600000) / 60)) + ","
+            writeString += str(bits_to_numbers(Longitude[1:]) / 600000) + ","
         else:
             return
         if Latitude[0] == "0":
-            writeString += str(int(bits_to_numbers(Latitude[1:]) / 600000)) + "." + str(int((bits_to_numbers(Latitude[1:]) % 600000) / 60)) + ","
+            writeString += str(bits_to_numbers(Latitude[1:]) / 600000) + ","
         else:
             return
         writeString += str(bits_to_numbers(COG) * 0.1) + "," + str(bits_to_numbers(HDG)) + "," + str(bits_to_numbers(Time_Stamp)) + "," + str(bits_to_numbers(Reserved_for_regional)) + "," + str(RAIM_flag) + ","
